@@ -1,4 +1,4 @@
-﻿using Backend.Data.Model;
+﻿using Backend.Entities;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -16,12 +16,12 @@ namespace Backend.Data
 
             modelBuilder.Entity<User_Auth_Activity>().HasKey(am => new
             {
-                am.ActorId,
-                am.MovieId
+                am.UserId,
+                am.AuthActivityId
             });
 
-            modelBuilder.Entity<User_Auth_Activity>().HasOne(m => m.User).WithMany(am => am.Actors_Movie).HasForeignKey(am => am.UserId);
-            modelBuilder.Entity<User_Auth_Activity>().HasOne(m => m.AuthActivity).WithMany(am => am.Actors_Movie).HasForeignKey(am => am.AuthActivity);
+            modelBuilder.Entity<User_Auth_Activity>().HasOne(m => m.User).WithMany(am => am.User_Auth_Activity).HasForeignKey(am => am.UserId);
+            modelBuilder.Entity<User_Auth_Activity>().HasOne(m => m.AuthActivity).WithMany(am => am.User_Auth_Activity).HasForeignKey(am => am.AuthActivityId);
 
             base.OnModelCreating(modelBuilder);
         }

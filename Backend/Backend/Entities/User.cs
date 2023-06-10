@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Backend.Data;
+using Backend.Entities;
 
-namespace Backend.Data.Model
+namespace Backend.Entities
 {
     public class User : IUpdateable
     {
@@ -19,6 +20,12 @@ namespace Backend.Data.Model
 
         public byte[]? PasswordHash { get; set; }
         public byte[]? PasswordSalt { get; set; }
+
+        public List<User_Auth_Activity>? User_Auth_Activity { get; set; }
+
+        public bool isLocked { get; set; } = false; 
+
+
 
         public DateTime CreatedDate { get; set; }
         public int CreatedBy { get; set; }

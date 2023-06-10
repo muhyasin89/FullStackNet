@@ -1,6 +1,6 @@
 ﻿namespace Backend.Data.Enums
 {
-    public enum AuthActivity
+    public enum AuthCategory
     {
         Success,
         Failed

@@ -1,6 +1,6 @@
 ﻿using Backend.Data.Enums;
 
-namespace Backend.Data.Model
+namespace Backend.Entities
 {
     public class AuthActivity : IUpdateable
     {

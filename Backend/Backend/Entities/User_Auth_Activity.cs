@@ -1,4 +1,4 @@
-﻿namespace Backend.Data.Model
+﻿namespace Backend.Entities
 {
     public class User_Auth_Activity
     {

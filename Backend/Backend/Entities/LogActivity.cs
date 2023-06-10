@@ -1,8 +1,8 @@
 ﻿using Backend.Data.Enums;
 
-namespace Backend.Data.Model
+namespace Backend.Entities
 {
-    public class ActivityLog : IUpdateable
+    public class LogActivity : IUpdateable
     {
         public Guid Id { get; set; }
         public AuthCategory AuthCategory { get; set; }

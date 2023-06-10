@@ -1,11 +1,11 @@
-﻿using Backend.Data.Model;
+﻿using Backend.Entities;
 using FluentValidation;
 
-namespace Backend.Data.ValidationModel
+namespace Backend.Entities.ValidationEntities
 {
     public class UserValidator : AbstractValidator<User>
     {
-        public UserValidator() 
+        public UserValidator()
         {
             RuleFor(x => x.Id).NotNull();
             RuleFor(x => x.Name).NotNull().Length(0, 100);

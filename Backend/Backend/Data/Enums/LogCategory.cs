@@ -1,6 +1,6 @@
 ﻿namespace Backend.Data.Enums
 {
-    public enum ActivityCategory
+    public enum LogCategory
     {
         Created = 1,
         Updated,
