@@ -1,4 +1,5 @@
-﻿using Backend.Data.Enums;
+﻿using Backend.Data;
+using Backend.Data.Enums;
 
 namespace Backend.Entities
 {
