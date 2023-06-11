@@ -1,4 +1,5 @@
 ﻿using Backend.Entities;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Backend.Repository
 {
@@ -14,6 +15,8 @@ namespace Backend.Repository
         Task<User?> GetUserById(Guid Id);
 
         Task<List<User>?> GetAllUsers();
+
+        Task<bool> SaveUser(User user, ModelStateDictionary modelState);
 
         User RecordCreatedUser(User user);
     }

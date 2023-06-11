@@ -80,13 +80,15 @@ namespace Backend.Controllers
                 return BadRequest(ModelState);
             }
 
-            User? findUser = await _userService.GetUserById(user.Id);
+            await _userService.SaveUser(user, ModelState);
+
+           /* User? findUser = await _userService.GetUserById(user.Id);
 
             if (findUser == null)
             {
                 return NotFound();
             }
-
+*/
             // set created time and id
             results.Data = _userService.RecordCreatedUser(user);
             results.Message = "Record Success";

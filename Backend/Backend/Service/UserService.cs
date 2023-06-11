@@ -4,6 +4,7 @@ using Backend.DTOs.Input;
 using Backend.Entities;
 using Backend.Repository;
 using Backend.Service;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Numerics;
 using System.Text.RegularExpressions;
 
@@ -125,6 +126,11 @@ namespace Backend.Migrations
             }
 
             return result;
+        }
+
+        public async Task<bool> SaveUser(User user, ModelStateDictionary modelState)
+        {
+            return await _userRepository.SaveUser(user, modelState);
         }
     }
 }

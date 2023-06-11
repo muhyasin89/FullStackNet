@@ -1,21 +1,48 @@
 <script setup lang="ts">
-import { errorSwal } from '../../utilities/ValidateHelp';
+import { ErrorSwal, CheckUnidentified } from '../../utilities/ValidateHelp';
 import { Form, Field, ErrorMessage } from 'vee-validate';
 import { useAuthStore } from '../../stores/auth';
+import { useRootStore } from '../../stores/root';
 import { ChangeDateValue } from '../../utilities/ChangeDate';
+import Swal from 'sweetalert2';
+import { useRouter } from 'vue-router';
 
 
 const authStore = useAuthStore();
+const rootStore = useRootStore();
+const router = useRouter();
 
 const submitForm = async (values: any) => {
     if (values["password"] != values["confirm_password"]) {
         let msg = "Password dan confirm password harus sama";
-        errorSwal(msg)
+        ErrorSwal(msg)
     }
 
-    authStore.registerData.dob = ChangeDateValue(authStore.registerData.dob)
+    if (CheckUnidentified(authStore.registerData.dob)) {
+        let msg = "Date of Birth harus di input";
+        ErrorSwal(msg)
+    } else {
+        authStore.registerData.dob = ChangeDateValue(authStore.registerData.dob);
+        const requestOptions = {
+            method: "POST",
+            headers: rootStore.GetHeaderLogin(),
+            body: JSON.stringify(authStore.registerData)
+        };
+        fetch(rootStore.host+ "Auth/register", requestOptions)
+        .then(response => response.json())
+        .catch(error => {
+            let err_message = error.json();
+            ErrorSwal(err_message.toString())
+        })
+        .then(data=> {
+            var serialize_data = JSON.stringify(data);
+            
+            Swal.fire("Success", serialize_data.toString(), "success");
+            router.push({ name: 'login' });
+        });
+    }
 
-    alert(JSON.stringify(authStore.registerData));
+    // alert(JSON.stringify(authStore.registerData));
 }
 
 const validateEmail = (value: any) => {
@@ -55,11 +82,11 @@ const validateRequired = (value: any) => {
 }
 
 const TimeFormat = (date: any) => {
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
 
-  return `${year}-${month}-${day}`;
+    return `${year}-${month}-${day}`;
 }
 
 </script>
@@ -86,13 +113,14 @@ const TimeFormat = (date: any) => {
             <label for="phoneNumber" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
                 phone</label>
             <Field type="text" name="phoneNumber" v-model="authStore.registerData.phoneNumber" id="email"
-                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"    
+                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="081112233" :rules="validatePhone" />
             <ErrorMessage name="phoneNumber" />
         </div>
         <div>
             <label for="dob" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date Of Birth</label>
-            <VueDatePicker v-model="authStore.registerData.dob" :enable-time-picker="false" :format="TimeFormat"></VueDatePicker>
+            <VueDatePicker v-model="authStore.registerData.dob" :enable-time-picker="false" :format="TimeFormat">
+            </VueDatePicker>
         </div>
         <div>
             <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
@@ -103,7 +131,8 @@ const TimeFormat = (date: any) => {
         </div>
         <div>
             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-            <Field type="password" name="password" id="password" placeholder="••••••••" v-model="authStore.registerData.password"
+            <Field type="password" name="password" id="password" placeholder="••••••••"
+                v-model="authStore.registerData.password"
                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 :rules="validateRequired" />
             <ErrorMessage name="password" />
@@ -111,8 +140,8 @@ const TimeFormat = (date: any) => {
         <div>
             <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm
                 password</label>
-            <Field type="password" :rules="validateRequired" name="confirm_password" v-model="authStore.registerData.password2"
-                id="confirm-password" placeholder="••••••••"
+            <Field type="password" :rules="validateRequired" name="confirm_password"
+                v-model="authStore.registerData.password2" id="confirm-password" placeholder="••••••••"
                 class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
             <ErrorMessage name="confirm_password" />
         </div>

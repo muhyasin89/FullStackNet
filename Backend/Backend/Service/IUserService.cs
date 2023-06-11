@@ -1,6 +1,7 @@
 ﻿using Backend.DTOs;
 using Backend.DTOs.Input;
 using Backend.Entities;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Backend.Service
 {
@@ -24,6 +25,7 @@ namespace Backend.Service
         public bool IsEmail(string username);
 
         public Task<User?> GetUserLogin(LoginDTOInput loginDTO);
+        Task<bool> SaveUser(User user, ModelStateDictionary modelState);
 
         public Task<List<UserDTO>?> GetUsers();
     }

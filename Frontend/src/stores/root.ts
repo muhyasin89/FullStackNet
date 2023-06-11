@@ -14,10 +14,14 @@ export const useRootStore = defineStore("root", () => {
     token.value = tokenResponse;
   };
 
-  const header_login = {
+  const HeaderLogin = {
     "Content-type": "application/json",
     Authorization: `Token ${token.value}`,
   };
+
+  const GetHeaderLogin = () =>{
+    return HeaderLogin;
+  }
 
   const GetHeader = () => {
     if (token.value == "") {
@@ -28,7 +32,7 @@ export const useRootStore = defineStore("root", () => {
       };
     } else {
       return {
-        headers: header_login,
+        headers: HeaderLogin,
       };
     }
   };
@@ -42,5 +46,6 @@ export const useRootStore = defineStore("root", () => {
     GetHeader,
     Logout,
     ChangeToken,
+    GetHeaderLogin
   };
 });

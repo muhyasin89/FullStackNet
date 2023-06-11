@@ -1,5 +1,6 @@
 ﻿using Backend.Data;
 using Backend.Entities;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using System.Numerics;
 
@@ -52,6 +53,24 @@ namespace Backend.Repository
             _context.Entry(user).State = EntityState.Modified;
 
             return user;
+        }
+
+        public async Task<bool> SaveUser(User user, ModelStateDictionary modelState)
+        {
+            _context.Users.Add(user);
+            try
+            {
+                await _context.SaveChangesAsync();
+
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                modelState.AddModelError("", "Unable to save change. " +
+                    "Try Again, if you have problem persists, " +
+                    "Contact your system administrator");
+            }
+
+            return true;
         }
     }
 }
