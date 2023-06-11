@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Backend.DTOs
+namespace Backend.DTOs.Input
 {
     public class RegisterDTO
     {
@@ -9,7 +9,7 @@ namespace Backend.DTOs
         [Required]
         public string? Password { get; set; }
 
-        public string? Name { get; set; } 
+        public string? Name { get; set; }
         [Required]
         [EmailAddress]
         public string? Email { get; set; }

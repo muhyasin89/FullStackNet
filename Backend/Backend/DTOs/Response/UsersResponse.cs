@@ -1,11 +1,10 @@
 ﻿namespace Backend.DTOs.Response
 {
-    public class RegisterResponse
+    public class UsersResponse
     {
-
         public int CodeStatus { get; set; }
 
-        public UserDTO? Data { get; set; }
+        public List<UserDTO>? Data { get; set; }
 
         public string Message { get; set; } = "Loaded Record Success";
     }
