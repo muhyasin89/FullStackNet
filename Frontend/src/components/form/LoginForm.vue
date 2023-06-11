@@ -40,7 +40,7 @@ const onSubmit = (values: any) => {
             
             
         });
-    alert(JSON.stringify(data));
+    //alert(JSON.stringify(data));
 
     return data;
 }
