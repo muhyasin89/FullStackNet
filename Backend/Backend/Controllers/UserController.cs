@@ -1,6 +1,5 @@
 ﻿using Backend.DTOs;
 using Backend.DTOs.Response;
-using Backend.Entities;
 using Backend.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

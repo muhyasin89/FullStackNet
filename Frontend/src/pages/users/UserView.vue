@@ -4,6 +4,8 @@ import MainLayout from '../../layouts/MainLayout.vue';
 import { useQuery } from "vue-query";
 import { useRootStore } from '../../stores/root';
 
+import  UserTable from '../../components/tables/UserTable.vue';
+
 const rootStore = useRootStore();
 
 function useTodosQuery() {
@@ -30,6 +32,7 @@ export default defineComponent({
     name: "home-view",
     components: {
         MainLayout,
+        UserTable,
     },
     mounted() {
         console.log(rootStore.GetHeaderLogin());
@@ -55,6 +58,7 @@ export default defineComponent({
                     <!-- We can assume by this point that `isSuccess === true` -->
                     <ul v-else>
                         <li v-for="user in data.data" :key="user.id">{{ user.username }}</li>
+                        <UserTable :items="data.data" :msg="data.data.length" />
                     </ul>
                 </template>
                 <template #fallback>
