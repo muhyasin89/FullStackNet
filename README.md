@@ -32,7 +32,7 @@ Using Postgress
 How To Start
 ```
     - Set User for progres or user psql default
-    - Create DATABASE Siloam
+    - Create DATABASE <database name>
     - grant privilage to destinated user
 ```
 
