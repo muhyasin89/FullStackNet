@@ -17,12 +17,12 @@ namespace Backend.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UsersResponse>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<UsersOriginalResponse>>> GetUsers()
         {
-            UsersResponse results = new UsersResponse
+            UsersOriginalResponse results = new UsersOriginalResponse
             {
                 Message = "Success retreive Record",
-                Data = await _userService.GetUsers(),
+                Data = await _userService.GetOriginalUsers(),
                 CodeStatus = 200
             };
 

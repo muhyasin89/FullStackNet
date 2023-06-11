@@ -122,7 +122,8 @@ namespace Backend.Migrations
             List<UserDTO>? result = null;
             foreach (var user in users)
             {
-                result?.Add(ChangeUserToDTOService(user!));
+                UserDTO userDTO = ChangeUserToDTOService(user!);
+                result?.Add(userDTO);
             }
 
             return result;
@@ -131,6 +132,11 @@ namespace Backend.Migrations
         public async Task<bool> SaveUser(User user, ModelStateDictionary modelState)
         {
             return await _userRepository.SaveUser(user, modelState);
+        }
+
+        public async Task<List<User>?> GetOriginalUsers()
+        {
+            return await _userRepository.GetAllUsers();
         }
     }
 }

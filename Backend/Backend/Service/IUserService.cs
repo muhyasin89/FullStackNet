@@ -27,6 +27,8 @@ namespace Backend.Service
         public Task<User?> GetUserLogin(LoginDTOInput loginDTO);
         Task<bool> SaveUser(User user, ModelStateDictionary modelState);
 
+        public Task<List<User>?> GetOriginalUsers();
+
         public Task<List<UserDTO>?> GetUsers();
     }
 }
