@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Data
 {
-    public class AppContext: DbContext
+    public class AppAPIContext: DbContext
     {
-        public AppContext(DbContextOptions<AppContext> options) : base(options)
+        public AppAPIContext(DbContextOptions<AppAPIContext> options) : base(options)
         {
 
         }
@@ -23,7 +23,17 @@ namespace Backend.Data
             modelBuilder.Entity<User_Auth_Activity>().HasOne(m => m.User).WithMany(am => am.User_Auth_Activity).HasForeignKey(am => am.UserId);
             modelBuilder.Entity<User_Auth_Activity>().HasOne(m => m.AuthActivity).WithMany(am => am.User_Auth_Activity).HasForeignKey(am => am.AuthActivityId);
 
+            modelBuilder.UseSerialColumns();
+
             base.OnModelCreating(modelBuilder);
+
         }
+        
+        public DbSet<User> Users { get; set; }
+        public DbSet<LogActivity> LogActivities { get; set; }
+        public DbSet<AuthActivity> AuthActivities { get; set; }
+
+        public DbSet<User_Auth_Activity> User_Auth_Activities { get; set; }
+
     }
 }
