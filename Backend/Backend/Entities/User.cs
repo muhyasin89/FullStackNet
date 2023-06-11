@@ -33,13 +33,13 @@ namespace Backend.Entities
 
 
         [DataType(DataType.Date)]
-        public DateTime CreatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
         public int CreatedBy { get; set; }
         [DataType(DataType.Date)]
-        public DateTime UpdatedDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
         public int UpdatedBy { get; set; }
         [DataType(DataType.Date)]
-        public DateTime DeletedDate { get; set; }
+        public DateTime? DeletedDate { get; set; }
         public int DeletedBy { get; set; }
         public bool IsDeleted { get; set; } = false;
 
