@@ -34,7 +34,7 @@
 
 
                     <li>
-                        <router-link to="/user"
+                        <router-link to="/users"
                             class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                             <font-awesome-icon icon="fa-envelope" class="filter-icon" />
                             <span class="flex-1 ml-3 whitespace-nowrap">User</span>
@@ -46,7 +46,7 @@
         <div class="p-4 sm:ml-64">
             <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
                 <nav-bar></nav-bar>
-                <slot>Content</slot>
+                <slot></slot>
             </div>
         </div>
     </div>

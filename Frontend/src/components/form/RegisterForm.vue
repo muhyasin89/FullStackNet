@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ErrorSwal, CheckUnidentified } from '../../utilities/ValidateHelp';
+import { ErrorSwal, CheckUnidentified, validateRequired } from '../../utilities/ValidateHelp';
 import { Form, Field, ErrorMessage } from 'vee-validate';
 import { useAuthStore } from '../../stores/auth';
 import { useRootStore } from '../../stores/root';
@@ -35,10 +35,15 @@ const submitForm = async (values: any) => {
             ErrorSwal(err_message.toString())
         })
         .then(data=> {
-            var serialize_data = JSON.stringify(data);
+            var serialize_data = data;
             
-            Swal.fire("Success", serialize_data.toString(), "success");
-            router.push({ name: 'login' });
+            if(serialize_data["codeStatus"] == 200){
+                Swal.fire("Success", serialize_data["message"], "success");
+                router.push({ name: 'login' });
+            }else{
+                Swal.fire("Error", serialize_data["message"], "error");
+            }
+            
         });
     }
 
@@ -73,13 +78,7 @@ const validatePhone = (value: any) => {
     // All is good
     return true;
 }
-const validateRequired = (value: any) => {
-    if (!value) {
-        return 'This field is required';
-    }
 
-    return true;
-}
 
 const TimeFormat = (date: any) => {
     const day = date.getDate();
