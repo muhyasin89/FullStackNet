@@ -16,7 +16,7 @@ export const useRootStore = defineStore("root", () => {
 
   const HeaderLogin = {
     "Content-type": "application/json",
-    Authorization: `Token ${token.value}`,
+    Authorization: `Bearer ${token.value}`,
   };
 
   const GetHeaderLogin = () =>{
