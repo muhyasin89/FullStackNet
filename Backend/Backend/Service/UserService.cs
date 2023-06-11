@@ -22,6 +22,7 @@ namespace Backend.Migrations
             return ChangeUserToDTOService(result);
         }
 
+
         public UserDTO ChangeUserToDTOService(User user) {
             var userDto = new UserDTO
             {
@@ -51,10 +52,27 @@ namespace Backend.Migrations
             return user != null;
         }
 
+        public Task<UserDTO> RecordCreatedUser(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> UserNameExist(string username)
         {
             var user = await _userRepository.GetByUsername(username);
             return user != null;
+        }
+
+        public async Task<User?> GetUserById(Guid id)
+        {
+            return await _userRepository.GetUserById(id);
+        }
+
+        public  UserDTO RecordCreatedUser(User user)
+        {
+            var result = _userRepository.RecordCreatedUser(user);
+
+            return ChangeUserToDTOService(result);
         }
     }
 }

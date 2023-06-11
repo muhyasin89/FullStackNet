@@ -10,5 +10,9 @@ namespace Backend.Repository
         Task<User?> GetByPhone(string phone);
 
         Task<User> AddUser(User user);
+
+        Task<User?> GetUserById(Guid Id);
+
+        User RecordCreatedUser(User user);
     }
 }

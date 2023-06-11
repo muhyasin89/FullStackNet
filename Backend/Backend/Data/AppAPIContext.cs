@@ -14,6 +14,7 @@ namespace Backend.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
+            // this is for logging there 2 type log activities and AuthActivity
             modelBuilder.Entity<User_Auth_Activity>().HasKey(am => new
             {
                 am.UserId,
@@ -21,7 +22,7 @@ namespace Backend.Data
             });
 
             modelBuilder.Entity<User_Auth_Activity>().HasOne(m => m.User).WithMany(am => am.User_Auth_Activity).HasForeignKey(am => am.UserId);
-            modelBuilder.Entity<User_Auth_Activity>().HasOne(m => m.AuthActivity).WithMany(am => am.User_Auth_Activity).HasForeignKey(am => am.AuthActivityId);
+            modelBuilder.Entity<User_Auth_Activity>().HasOne(m => m.AuthActivity).WithMany(am => am.UserAuthActivity).HasForeignKey(am => am.AuthActivityId);
 
             modelBuilder.UseSerialColumns();
 

@@ -27,8 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\Response\" />
-    <Folder Include="Service\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

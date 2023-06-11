@@ -12,5 +12,9 @@ namespace Backend.Service
         public Task<bool> EmailExists(string email);
 
         public Task<UserDTO> AddUser(User user);
+
+        public Task<User?> GetUserById(Guid id);
+
+        public UserDTO RecordCreatedUser(User user);
     }
 }

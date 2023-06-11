@@ -72,8 +72,20 @@ namespace Backend.Controllers
                 PasswordSalt = hmac.Key
             };
 
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-            results.Data = _userService.ChangeUserToDTOService(user);
+            User? findUser = await _userService.GetUserById(user.Id);
+
+            if(findUser == null)
+            {
+                return NotFound();
+            }
+
+            // set created time and id
+            results.Data =  _userService.RecordCreatedUser(user);
             results.Message = "Record Success";
 
             return Ok(results);

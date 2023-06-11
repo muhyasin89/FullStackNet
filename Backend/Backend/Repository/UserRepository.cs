@@ -35,5 +35,18 @@ namespace Backend.Repository
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
         }
+
+        public async Task<User?> GetUserById(Guid Id)
+        {
+            return await _context.Users.FindAsync(Id);
+        }
+
+        public User RecordCreatedUser(User user)
+        {
+            user.CreatedBy = user.Id;
+            _context.Entry(user).State = EntityState.Modified;
+
+            return user;
+        }
     }
 }

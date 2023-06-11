@@ -32,15 +32,13 @@ namespace Backend.Entities
         public bool isLocked { get; set; } = false;
 
 
-        [DataType(DataType.Date)]
-        public DateTime? CreatedDate { get; set; }
-        public int CreatedBy { get; set; }
-        [DataType(DataType.Date)]
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public Guid CreatedBy { get; set; }
+
         public DateTime? UpdatedDate { get; set; }
-        public int UpdatedBy { get; set; }
-        [DataType(DataType.Date)]
+        public Guid UpdatedBy { get; set; }
         public DateTime? DeletedDate { get; set; }
-        public int DeletedBy { get; set; }
+        public Guid DeletedBy { get; set; }
         public bool IsDeleted { get; set; } = false;
 
 

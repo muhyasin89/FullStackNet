@@ -1,14 +1,14 @@
 ﻿namespace Backend.Data
 {
-    public class IUpdateable
+    public interface IUserUpdateable
     {
 
          DateTime CreatedDate { get; set; }
-         int CreatedBy { get; set; }
+         Guid CreatedBy { get; set; }
          DateTime UpdatedDate { get; set; }
-         int UpdatedBy { get; set; }
+        Guid UpdatedBy { get; set; }
         DateTime DeletedDate { get; set; }
-        int DeletedBy { get; set; }
-        bool IsDeleted { get; set; } = false;
+        Guid DeletedBy { get; set; }
+        bool IsDeleted { get; set; }
     }
 }

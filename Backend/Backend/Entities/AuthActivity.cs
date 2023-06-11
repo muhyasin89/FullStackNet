@@ -10,6 +10,10 @@ namespace Backend.Entities
         public Guid Id { get; set; }
         public AuthCategory AuthCategory { get; set; }
 
-        public List<User_Auth_Activity>? User_Auth_Activity { get; set; }
+        public string Description { get; set; } = String.Empty;
+
+        public List<User_Auth_Activity>? UserAuthActivity { get; set; }
+
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
     }
 }
