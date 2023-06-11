@@ -4,7 +4,7 @@ using Backend.Entities;
 
 namespace Backend.Entities
 {
-    public class User : IUpdateable
+    public class User : IUserUpdateable
     {
         [Key]
         public Guid Id { get; set; }
