@@ -1,6 +1,6 @@
 <script lang="ts">
 import AuthLayout from '../../layouts/AuthLayout.vue';
-import LoginForm from '../../components/form/LoginForm.vue';
+import LoginForm  from '../../components/form/LoginForm.vue';
 import { defineComponent } from "vue";
 export default defineComponent({
     name: "LoginView",

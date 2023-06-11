@@ -1,3 +1,3 @@
-export interface envViteType {
+export interface EnvViteType {
   host?: any;
 }

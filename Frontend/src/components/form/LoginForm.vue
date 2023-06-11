@@ -1,4 +1,4 @@
-<script  lang="ts">
+<script setup lang="ts">
 import { Form, Field, ErrorMessage } from 'vee-validate';
 
 const onSubmit = (values: any) => {

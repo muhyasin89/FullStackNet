@@ -7,7 +7,6 @@ namespace Backend.DTOs
 
         public Guid Id { get; set; }
 
-
         public string Username { get; set; } = string.Empty;
 
         public string Name { get; set; } = string.Empty;
@@ -15,7 +14,7 @@ namespace Backend.DTOs
         public string Email { get; set; } = string.Empty;
 
         public string PhoneNumber { get; set; } = string.Empty;
-
+        [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
 
         public string ProfilePicture { get; set; } = string.Empty;

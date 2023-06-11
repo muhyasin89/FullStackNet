@@ -16,7 +16,23 @@ import 'vue3-easy-data-table/dist/style.css';
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
-import { createPinia } from 'pinia'
+import { VueQueryPlugin } from "vue-query";
+
+import { createPinia } from 'pinia';
+
+import { faCoffee,  faSearch } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faCoffee)
+library.add(faSearch)
+/* import the fontawesome core */
+import { library } from '@fortawesome/fontawesome-svg-core'
+
+import LoadingComponent from "./components/LoadingComponent.vue";
+
+import router from './router';
+
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 
 const vuetify = createVuetify({
   components,
@@ -27,10 +43,15 @@ const vuetify = createVuetify({
 const pinia = createPinia()
 
 const app = createApp(App);
+app.use(router);
 app.use(pinia);
 app.use(vuetify);
 app.use(VueSweetalert2);
 
+app.use(VueQueryPlugin);
+
 app.component('EasyDataTable', Vue3EasyDataTable);
+app.component('LoadingComponent', LoadingComponent);
+app.component('VueDatePicker', VueDatePicker);
 
 app.mount('#app');
