@@ -1,4 +1,11 @@
 <script setup lang="ts">
+import router from './router'
+
+const IsAuthentication = authStore.isAuthenticated;
+
+useQueryProvider();
+
+
 </script>
 
 <template>

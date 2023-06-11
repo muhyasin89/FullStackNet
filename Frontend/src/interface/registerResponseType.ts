@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { RegisterData } from "./registerType";
+import { RegisterData } from "./RegisterType";
 
 export const ReimburseResponseData = {
   codeStatus: z.number(),

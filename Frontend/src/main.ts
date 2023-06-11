@@ -16,13 +16,18 @@ import 'vue3-easy-data-table/dist/style.css';
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
+import { createPinia } from 'pinia'
+
 const vuetify = createVuetify({
   components,
   directives,
 })
 
 
+const pinia = createPinia()
+
 const app = createApp(App);
+app.use(pinia);
 app.use(vuetify);
 app.use(VueSweetalert2);
 
