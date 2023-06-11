@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Backend.Data;
+using Backend.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,8 +14,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppAPIContext>(
     o => o.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
     );
+builder.Services.AddCors();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 var app = builder.Build();
+app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().WithOrigins("http://localhost:5173/"));
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

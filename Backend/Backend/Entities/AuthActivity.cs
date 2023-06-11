@@ -12,7 +12,7 @@ namespace Backend.Entities
 
         public string Description { get; set; } = String.Empty;
 
-        public List<User_Auth_Activity>? UserAuthActivity { get; set; }
+        public List<UserAuthActivity>? UserAuthActivity { get; set; }
 
         public DateTime CreatedDate { get; set; } = DateTime.Now;
     }

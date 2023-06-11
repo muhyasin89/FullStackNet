@@ -1,4 +1,5 @@
-﻿using Backend.DTOs.Response;
+﻿using Backend.DTOs;
+using Backend.DTOs.Input;
 using Backend.Entities;
 
 namespace Backend.Service
@@ -16,5 +17,9 @@ namespace Backend.Service
         public Task<User?> GetUserById(Guid id);
 
         public UserDTO RecordCreatedUser(User user);
+
+        public bool IsEmail(string username);
+
+        public Task<User?> GetUserLogin(LoginDTOInput loginDTO);
     }
 }

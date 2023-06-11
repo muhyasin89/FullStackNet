@@ -1,9 +1,11 @@
 ﻿using Backend.Data;
-using Backend.DTOs.Response;
+using Backend.DTOs;
+using Backend.DTOs.Input;
 using Backend.Entities;
 using Backend.Repository;
 using Backend.Service;
 using System.Numerics;
+using System.Text.RegularExpressions;
 
 namespace Backend.Migrations
 {
@@ -52,10 +54,6 @@ namespace Backend.Migrations
             return user != null;
         }
 
-        public Task<UserDTO> RecordCreatedUser(int userId)
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<bool> UserNameExist(string username)
         {
@@ -73,6 +71,37 @@ namespace Backend.Migrations
             var result = _userRepository.RecordCreatedUser(user);
 
             return ChangeUserToDTOService(result);
+        }
+
+        public bool IsEmail(string username)
+        {
+            // Email pattern regular expression
+            string pattern = @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
+
+            // Check if the input matches the email pattern
+            if (Regex.IsMatch(username, pattern))
+            {
+                return true;  // It's an email
+            }
+            else
+            {
+                return false; // It's a regular string
+            }
+        }
+
+        public async Task<User?> GetUserLogin(LoginDTOInput loginDTO)
+        {
+            User? user = null;
+            if (IsEmail(loginDTO.Username!))
+            {
+                user = await _userRepository.GetByEmail(loginDTO.Username!);
+            }
+            else
+            {
+                user = await _userRepository.GetByUsername(loginDTO.Username!);
+            }
+
+            return user;
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Backend.Entities
         public byte[]? PasswordHash { get; set; }
         public byte[]? PasswordSalt { get; set; }
 
-        public List<User_Auth_Activity>? User_Auth_Activity { get; set; }
+        public List<UserAuthActivity>? UserAuthActivity { get; set; } 
 
         public bool isLocked { get; set; } = false;
 

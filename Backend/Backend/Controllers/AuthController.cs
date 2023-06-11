@@ -1,6 +1,7 @@
 ﻿using Backend.DTOs.Input;
 using Backend.DTOs.Response;
 using Backend.Entities;
+using Backend.Migrations;
 using Backend.Service;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Cryptography;
@@ -12,14 +13,16 @@ namespace Backend.Controllers
     {
 
         private readonly IUserService _userService;
+        private readonly ITokenService _tokenService;
 
-        public AuthController( IUserService userDTOService)
+        public AuthController(IUserService userDTOService, ITokenService tokenService)
         {
             _userService = userDTOService;
+            _tokenService = tokenService;
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<RegisterResponse>> Register(RegisterDTO registerDTO)
+        public async Task<ActionResult<RegisterResponse>> Register(RegisterDTOInput registerDTO)
         {
 
             RegisterResponse results = new RegisterResponse
@@ -79,16 +82,51 @@ namespace Backend.Controllers
 
             User? findUser = await _userService.GetUserById(user.Id);
 
-            if(findUser == null)
+            if (findUser == null)
             {
                 return NotFound();
             }
 
             // set created time and id
-            results.Data =  _userService.RecordCreatedUser(user);
+            results.Data = _userService.RecordCreatedUser(user);
             results.Message = "Record Success";
 
             return Ok(results);
         }
+
+
+        [HttpPost("login")]
+        public async Task<ActionResult<LoginResponse>> AuthLogin(LoginDTOInput loginDTO)
+        {
+            LoginResponse results = new LoginResponse
+            {
+                CodeStatus = 200,
+                Message = "Ok"
+            };
+
+            var user = await _userService.GetUserLogin(loginDTO);
+            if (user == null) return Unauthorized();
+
+            using var hmac = new HMACSHA512(user.PasswordSalt!);
+
+            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDTO.Password!));
+
+            for(int i=0; i< computedHash.Length; i++)
+            {
+                if (computedHash[i] != user!.PasswordHash![i]) return Unauthorized();
+            }
+
+            // if valid return token
+            DateTime expiredTime = DateTime.Now.AddDays(7);
+            String token = _tokenService.CreateToken(user, expiredTime);
+
+            results.Token = token;
+            results.Username = user.Username;
+            results.ExpiredTime = expiredTime;
+
+            return Ok(results);
+
+        }
+
     }
 }

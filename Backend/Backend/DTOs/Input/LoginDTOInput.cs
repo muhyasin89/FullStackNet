@@ -2,7 +2,7 @@
 
 namespace Backend.DTOs.Input
 {
-    public class LoginDTO
+    public class LoginDTOInput
     {
 
         public string? Username { get; set; }

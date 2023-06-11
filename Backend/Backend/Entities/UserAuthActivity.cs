@@ -1,6 +1,6 @@
 ﻿namespace Backend.Entities
 {
-    public class User_Auth_Activity
+    public class UserAuthActivity
     {
 
         public Guid UserId { get; set; }
