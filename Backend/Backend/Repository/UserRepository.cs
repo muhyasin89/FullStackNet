@@ -21,6 +21,11 @@ namespace Backend.Repository
             return user;
         }
 
+        public async Task<List<User>?> GetAllUsers()
+        {
+            return await _context.Users.ToListAsync();
+        }
+
         public async Task<User?>  GetByEmail(string email)
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);

@@ -103,5 +103,28 @@ namespace Backend.Migrations
 
             return user;
         }
+
+        public async Task<UserDTO?> GetUser(Guid id)
+        {
+            User? user = await GetUserById(id);
+
+            if(user == null) { return null; }
+
+            return ChangeUserToDTOService(user);
+        }
+
+        public async Task<List<UserDTO>?> GetUsers()
+        {
+            List<User>? users = await _userRepository.GetAllUsers();
+
+            if(users == null) { return null; }
+            List<UserDTO>? result = null;
+            foreach (var user in users)
+            {
+                result?.Add(ChangeUserToDTOService(user!));
+            }
+
+            return result;
+        }
     }
 }

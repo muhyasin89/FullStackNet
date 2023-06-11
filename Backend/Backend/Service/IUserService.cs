@@ -16,10 +16,15 @@ namespace Backend.Service
 
         public Task<User?> GetUserById(Guid id);
 
+
+        public Task<UserDTO?> GetUser(Guid id);
+
         public UserDTO RecordCreatedUser(User user);
 
         public bool IsEmail(string username);
 
         public Task<User?> GetUserLogin(LoginDTOInput loginDTO);
+
+        public Task<List<UserDTO>?> GetUsers();
     }
 }

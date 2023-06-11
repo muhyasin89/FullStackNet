@@ -13,6 +13,8 @@ namespace Backend.Repository
 
         Task<User?> GetUserById(Guid Id);
 
+        Task<List<User>?> GetAllUsers();
+
         User RecordCreatedUser(User user);
     }
 }
