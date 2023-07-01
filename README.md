@@ -1,9 +1,9 @@
 
 
 
-### Siloam Full Stack
+# Siloam Full Stack
 
-# Frontend
+### Frontend
 
 Using Vue3 with Vite
 
@@ -14,7 +14,7 @@ How To Start
     - npm install
 ```
 
-# Backend
+### Backend
 
 Using Net 7
 
@@ -25,7 +25,7 @@ How To Start
 ```
 
 
-# Database
+### Database
 
 Using Postgress
 
