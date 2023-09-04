@@ -33,6 +33,7 @@ How To Start
 ```
     - Set User for progres or user psql default
     - Create DATABASE <app>
+    - Create DATABASE <database name>
     - grant privilage to destinated user
 ```
 

@@ -3,6 +3,7 @@ using System;
 using Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(AppAPIContext))]
-    partial class AppAPIContextModelSnapshot : ModelSnapshot
+    [Migration("20230611075525_MyFirstMigration")]
+    partial class MyFirstMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -121,7 +124,7 @@ namespace Backend.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Backend.Entities.UserAuthActivity", b =>
+            modelBuilder.Entity("Backend.Entities.User_Auth_Activity", b =>
                 {
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
@@ -136,7 +139,7 @@ namespace Backend.Migrations
                     b.ToTable("User_Auth_Activities");
                 });
 
-            modelBuilder.Entity("Backend.Entities.UserAuthActivity", b =>
+            modelBuilder.Entity("Backend.Entities.User_Auth_Activity", b =>
                 {
                     b.HasOne("Backend.Entities.AuthActivity", "AuthActivity")
                         .WithMany("UserAuthActivity")
@@ -145,7 +148,7 @@ namespace Backend.Migrations
                         .IsRequired();
 
                     b.HasOne("Backend.Entities.User", "User")
-                        .WithMany("UserAuthActivity")
+                        .WithMany("User_Auth_Activity")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -162,7 +165,7 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Entities.User", b =>
                 {
-                    b.Navigation("UserAuthActivity");
+                    b.Navigation("User_Auth_Activity");
                 });
 #pragma warning restore 612, 618
         }

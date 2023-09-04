@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Backend.Migrations
 {
     [DbContext(typeof(AppAPIContext))]
-    [Migration("20230611011913_FirstInit")]
-    partial class FirstInit
+    [Migration("20230611080322_Update-Name")]
+    partial class UpdateName
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,23 +34,12 @@ namespace Backend.Migrations
                     b.Property<int>("AuthCategory")
                         .HasColumnType("integer");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("DeletedBy")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<int>("UpdatedBy")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -63,28 +52,7 @@ namespace Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<int>("AuthCategory")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("DeletedBy")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("DeletedDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<int>("UpdatedBy")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -102,8 +70,8 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -111,10 +79,10 @@ namespace Backend.Migrations
                     b.Property<DateTime>("DOB")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("DeletedBy")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("DeletedBy")
+                        .HasColumnType("uuid");
 
-                    b.Property<DateTime>("DeletedDate")
+                    b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
@@ -138,10 +106,10 @@ namespace Backend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("UpdatedBy")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("UpdatedBy")
+                        .HasColumnType("uuid");
 
-                    b.Property<DateTime>("UpdatedDate")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Username")
@@ -174,13 +142,13 @@ namespace Backend.Migrations
             modelBuilder.Entity("Backend.Entities.User_Auth_Activity", b =>
                 {
                     b.HasOne("Backend.Entities.AuthActivity", "AuthActivity")
-                        .WithMany("User_Auth_Activity")
+                        .WithMany("UserAuthActivity")
                         .HasForeignKey("AuthActivityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Backend.Entities.User", "User")
-                        .WithMany("User_Auth_Activity")
+                        .WithMany("UserAuthActivity")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -192,12 +160,12 @@ namespace Backend.Migrations
 
             modelBuilder.Entity("Backend.Entities.AuthActivity", b =>
                 {
-                    b.Navigation("User_Auth_Activity");
+                    b.Navigation("UserAuthActivity");
                 });
 
             modelBuilder.Entity("Backend.Entities.User", b =>
                 {
-                    b.Navigation("User_Auth_Activity");
+                    b.Navigation("UserAuthActivity");
                 });
 #pragma warning restore 612, 618
         }

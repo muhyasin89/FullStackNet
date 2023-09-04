@@ -4,7 +4,7 @@ using Backend.Entities;
 
 namespace Backend.Entities
 {
-    public class User : IUpdateable
+    public class User : IUserUpdateable
     {
         [Key]
         public Guid Id { get; set; }
@@ -27,20 +27,18 @@ namespace Backend.Entities
         public byte[]? PasswordHash { get; set; }
         public byte[]? PasswordSalt { get; set; }
 
-        public List<User_Auth_Activity>? User_Auth_Activity { get; set; }
+        public List<UserAuthActivity>? UserAuthActivity { get; set; } 
 
         public bool isLocked { get; set; } = false;
 
 
-        [DataType(DataType.Date)]
-        public DateTime CreatedDate { get; set; }
-        public int CreatedBy { get; set; }
-        [DataType(DataType.Date)]
-        public DateTime UpdatedDate { get; set; }
-        public int UpdatedBy { get; set; }
-        [DataType(DataType.Date)]
-        public DateTime DeletedDate { get; set; }
-        public int DeletedBy { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public Guid CreatedBy { get; set; }
+
+        public DateTime? UpdatedDate { get; set; }
+        public Guid UpdatedBy { get; set; }
+        public DateTime? DeletedDate { get; set; }
+        public Guid DeletedBy { get; set; }
         public bool IsDeleted { get; set; } = false;
 
 
